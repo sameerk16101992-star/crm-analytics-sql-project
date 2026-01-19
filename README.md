@@ -35,12 +35,12 @@ Several analytical features were **derived**, as they were not present in the ra
 ---
 
 ## File Structure
-- `01_table_setup.sql` – Base schema
-- `02_feature_engineering.sql` – Derived CRM indicators
-- `03_executive_overview.sql` – High-level KPIs
-- `04_lifecycle_intelligence.sql` – Lifecycle analysis
-- `05_churn_drivers.sql` – Root cause analysis
-- `06_loyalty_growth.sql` – Loyalty & revenue insights
+- `table_setup.sql` – Base schema
+- `feature_engineering.sql` – Derived CRM indicators
+- `executive_overview.sql` – High-level KPIs
+- `lifecycle_intelligence.sql` – Lifecycle analysis
+- `churn_drivers.sql` – Root cause analysis
+- `loyalty_growth.sql` – Loyalty & revenue insights
 
 ---
 
