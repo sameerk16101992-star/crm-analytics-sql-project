@@ -1,0 +1,35 @@
+
+/* Engagement decay across lifecycle */
+SELECT 
+    lifecycle_stage,
+    AVG(monthly_logins) AS avg_logins,
+    AVG(weekly_active_days) AS avg_active_days,
+    AVG(features_used) AS avg_features
+FROM customer_data
+GROUP BY lifecycle_stage;
+
+/* Risk escalation by lifecycle */
+SELECT 
+    lifecycle_stage,
+    churn_risk_profile,
+    COUNT(*) AS customers
+FROM customer_data
+GROUP BY lifecycle_stage, churn_risk_profile;
+
+/* Revenue exposure by lifecycle */
+SELECT 
+    lifecycle_stage,
+    SUM(total_revenue) AS total_revenue,
+    SUM(CASE WHEN churn_risk_profile = 'High' 
+             THEN total_revenue ELSE 0 END) AS revenue_exposed
+FROM customer_data
+GROUP BY lifecycle_stage;
+
+/* Reactivation opportunity */
+SELECT 
+    lifecycle_stage,
+    COUNT(*) AS reactivation_candidates
+FROM customer_data
+WHERE recently_inactive = 'Yes' AND churn = 0
+GROUP BY lifecycle_stage;
+
