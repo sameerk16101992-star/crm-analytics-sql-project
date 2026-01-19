@@ -1,0 +1,29 @@
+/* Revenue by loyalty tier */
+SELECT loyalty_tier,
+       COUNT(*) AS customers,
+       SUM(total_revenue) AS revenue
+FROM customer_data
+GROUP BY loyalty_tier;
+
+/* Engagement vs revenue risk */
+SELECT 
+    loyalty_tier,
+    engagement_level,
+    COUNT(*) AS customers,
+    ROUND(AVG(churn)*100,2) AS churn_rate
+FROM customer_data
+GROUP BY loyalty_tier, engagement_level;
+
+/* Upsell readiness */
+SELECT 
+    loyalty_tier,
+    COUNT(*) AS upgrade_ready
+FROM customer_data
+WHERE upgrade_potential = 'Yes'
+GROUP BY loyalty_tier;
+
+/* Referral behavior */
+SELECT loyalty_tier,
+       ROUND(AVG(referral_count), 2) AS avg_referrals
+FROM customer_data
+GROUP BY loyalty_tier;
