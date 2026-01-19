@@ -1,0 +1,55 @@
+USE [TelecomChurn]
+GO
+
+/****** Object:  Table [dbo].[customer_data]    Script Date: 19-01-2026 03:45:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[customer_data](
+	[city] [varchar](50) NULL,
+	[customer_segment] [varchar](30) NULL,
+	[tenure_months] [int] NULL,
+	[signup_channel] [varchar](30) NULL,
+	[contract_type] [varchar](30) NULL,
+	[monthly_logins] [int] NULL,
+	[weekly_active_days] [int] NULL,
+	[avg_session_time] [decimal](5, 2) NULL,
+	[features_used] [int] NULL,
+	[usage_growth_rate] [decimal](5, 2) NULL,
+	[last_login_days_ago] [int] NULL,
+	[monthly_fee] [decimal](10, 2) NULL,
+	[total_revenue] [decimal](12, 2) NULL,
+	[payment_method] [varchar](30) NULL,
+	[payment_failures] [int] NULL,
+	[discount_applied] [varchar](10) NULL,
+	[price_increase_last_3m] [varchar](10) NULL,
+	[support_tickets] [int] NULL,
+	[avg_resolution_time] [decimal](5, 2) NULL,
+	[complaint_type] [varchar](50) NULL,
+	[csat_score] [int] NULL,
+	[escalations] [int] NULL,
+	[email_open_rate] [decimal](5, 2) NULL,
+	[marketing_click_rate] [decimal](5, 2) NULL,
+	[nps_score] [int] NULL,
+	[survey_response] [varchar](20) NULL,
+	[referral_count] [int] NULL,
+	[churn] [varchar](5) NULL,
+	[engagement_level] [varchar](20) NULL,
+	[loyalty_tier] [varchar](20) NULL,
+	[lifecycle_stage] [varchar](30) NULL,
+	[recently_inactive] [varchar](10) NULL,
+	[revenue_at_risk] [varchar](10) NULL,
+	[upgrade_potential] [varchar](10) NULL,
+	[tenure_bucket] [varchar](20) NULL,
+	[churn_risk_profile] [varchar](20) NULL,
+	[gender] [varchar](10) NULL,
+	[age] [int] NULL,
+	[country] [varchar](50) NULL,
+	[customer_id] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+
