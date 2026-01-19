@@ -1,0 +1,63 @@
+USE TelecomChurn;
+
+/* =========================================================
+   CRM FEATURE ENGINEERING
+   ========================================================= */
+
+SELECT
+    cd.*,
+
+    /* Engagement Level */
+    CASE
+        WHEN cd.monthly_logins >= 20
+         AND cd.weekly_active_days >= 5
+         AND cd.features_used >= 5 THEN 'High'
+        WHEN cd.monthly_logins BETWEEN 10 AND 19 THEN 'Medium'
+        ELSE 'Low'
+    END AS engagement_level,
+
+    /* Lifecycle Stage */
+    CASE
+        WHEN cd.churn = 1 THEN 'Churned'
+        WHEN cd.last_login_days_ago > 45 THEN 'At-risk'
+        WHEN cd.tenure_months >= 12 AND cd.monthly_logins >= 20 THEN 'Loyal'
+        WHEN cd.tenure_months >= 3 THEN 'Active'
+        ELSE 'New'
+    END AS lifecycle_stage,
+
+    /* Recently Inactive */
+    CASE
+        WHEN cd.last_login_days_ago > 30 AND cd.churn = 0 THEN 'Yes'
+        ELSE 'No'
+    END AS recently_inactive,
+
+    /* Churn Risk Profile */
+    CASE
+        WHEN cd.churn = 1 THEN 'Churned'
+        WHEN cd.monthly_logins < 10 AND cd.support_tickets >= 3 THEN 'High'
+        WHEN cd.monthly_logins < 10 THEN 'Medium'
+        ELSE 'Low'
+    END AS churn_risk_profile,
+
+    /* Revenue at Risk */
+    CASE
+        WHEN cd.monthly_logins < 10 AND cd.support_tickets >= 3 THEN 'Yes'
+        ELSE 'No'
+    END AS revenue_at_risk,
+
+    /* Upgrade Potential */
+    CASE
+        WHEN cd.monthly_logins >= 20 AND cd.churn = 0 AND cd.tenure_months >= 6
+        THEN 'Yes'
+        ELSE 'No'
+    END AS upgrade_potential,
+
+    /* Tenure Bucket */
+    CASE
+        WHEN cd.tenure_months < 6 THEN '0�6 Months'
+        WHEN cd.tenure_months BETWEEN 6 AND 12 THEN '6�12 Months'
+        WHEN cd.tenure_months BETWEEN 12 AND 24 THEN '1�2 Years'
+        ELSE '2+ Years'
+    END AS tenure_bucket
+
+FROM dbo.customer_data cd;
