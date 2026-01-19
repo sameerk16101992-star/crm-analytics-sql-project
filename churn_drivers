@@ -1,0 +1,26 @@
+/* Churn by engagement */
+SELECT engagement_level,
+       COUNT(*) AS customers,
+       ROUND(AVG(churn)*100,2) AS churn_rate
+FROM customer_data
+GROUP BY engagement_level;
+
+/* Churn by contract type */
+SELECT contract_type,
+       COUNT(*) AS customers,
+       ROUND(AVG(churn)*100,2) AS churn_rate
+FROM customer_data
+GROUP BY contract_type;
+
+/* Price increase impact */
+SELECT price_increase_last_3m,
+       ROUND(AVG(churn)*100,2) AS churn_rate
+FROM customer_data
+GROUP BY price_increase_last_3m;
+
+/* Support friction */
+SELECT complaint_type,
+       AVG(support_tickets) AS avg_tickets,
+       ROUND(AVG(churn)*100,2) AS churn_rate
+FROM customer_data
+GROUP BY complaint_type;
